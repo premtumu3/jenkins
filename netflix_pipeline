@@ -1,0 +1,39 @@
+pipeline{
+    agent any
+    
+    stages{
+        stage('checkout'){
+            steps{
+                git branch: 'main', url: 'https://github.com/Saikiran-Janga/jenkins.git'
+            }
+        }
+        stage('build'){
+            steps{
+                sh 'mvn compile'
+            }
+        }
+        stage('test'){
+            steps{
+                sh 'mvn test'
+            }
+        }
+        stage('artifact'){
+            steps{
+                sh 'mvn clean package'
+            }
+        }
+        stage('deploy'){
+            steps{
+                deploy adapters: [
+                    tomcat9(
+                        credentialsId: '7646d54c-7a8e-417d-95f4-92180d2d3a2e',
+                        path: '',
+                        url: 'http://13.126.166.108:8080/'
+                        )
+                    ],
+                    contextPath: 'netflix',
+                    war: 'target/*.war'
+            }
+        }
+    }
+}
