@@ -5,7 +5,7 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>in.RAHAM</groupId>
+    <groupId>in.RAHAM</groupd>
     <artifactId>NETFLIX</artifactId>
     <version>1.5.5</version>
     <packaging>war</packaging>
